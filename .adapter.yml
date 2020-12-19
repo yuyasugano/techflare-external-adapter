@@ -1,0 +1,11 @@
+name: TechFlare
+description: Adapter that connects Chainlink nodes to the TechFlare API
+node_identifier: techflarebridge
+platforms:
+  - AWS Lambda
+data_sources:
+  - name: TechFlare API
+    url: https://
+parameters:
+  - n
+  - p
