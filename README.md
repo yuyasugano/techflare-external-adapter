@@ -10,7 +10,7 @@ To give TechFlare API own description:
 To use this adapter on-chain, find a node that supports this adapter and build your request like so:
 ```
 Chainlink.Request memory request = buildChainlinkRequest(jobId, this, this.fulfill.selector);
-run.add("n", "bitcoin");
+run.add("n", "btc");
 run.add("p", "m");
 string[] memory copyPath = new string[](2);
 copyPath[0] = "disparity";
@@ -21,6 +21,27 @@ request.addInt("times", timesAmount);
 ```
 
 ### Usage
+Pass parameters a symbol of token `n` and a period of ohlc data `p`.
+
+Supported tokens
+```
+btc
+eth
+ltc
+bch
+ada
+bnb
+dot
+link
+```
+ 
+Supported periods
+```
+m
+h
+d
+```
+ 
 
 ```
 curl -X POST -H 'Content-Type: application/json' \
@@ -28,7 +49,7 @@ curl -X POST -H 'Content-Type: application/json' \
 {
     "jobRunId": "1",
     "data": {
-        "n": "bitcoin",
+        "n": "btc",
         "p": "m"
     }
 }
@@ -39,8 +60,11 @@ Response:
 {
     "jobRunId": "1",
     "data": {
-        "name": "bitcoin",
+        "name": "btc",
+        "std": {"5": 72.69628786962369, "20": 603.850574126043, "3": 76.30369781353097},
+        "momentum": {"5": 6.5, "20": 1693.7599999999984, "3": 68.2599999999984},
         "sma": {"5": 23109.73200000001, "20": 22955.602000000003, "3": 23147.51666666668},
+        "ema": {"5": 27820.245474540803, "20": 27501.09968838345, "3": 27855.8362013757},
         "disparity": {"5": 1.0008787639770116, "20": 1.0040799627036572, "3": 0.9992449874032557},
         "return": {"5": 0.007453312263817402, "20": 0.012471145842255948, "3": 0.0024148057234190112}
     },
