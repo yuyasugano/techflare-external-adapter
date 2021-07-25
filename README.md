@@ -1,17 +1,23 @@
 # TechFlare External Adapter 
-External Adapter for Chainlink to query the TechFlare API.
-This adapter hasn't been yet open in chainlink market.
-
-
+External Adapter for Chainlink to query the TechFlare API. 
+ 
 To give TechFlare API own description:
 > TechFlare collects and aggregates precise and reliable information from multiple sources in web. It provides financial data and technical indicators in the decentralized oracle Chainlink. Our success is driven by our futuristic mind and a disciplined focus on democratizing access to data.
+ 
+## Prerequisite
+The adapter provides technical indicators to call from smart contracts for trading, arbitrage, collateral swaps of crypto currencies and assets. We are maintaining three tables minute, hour, day for each asset and rolling windows as below. Please note that the adapter do not support any combinations except the mentioned currencies and table, indicators. 
 
+- Minute and Hourly tables support the windows 3, 5, 9, 20, 30
+- Daily table supports the windows 3, 5, 9, 20, 30, 50, 100, 200
+ 
+Technical Indicators supported are simple moving average(sma), exponential moving average(ema), return, disparity, momentum and standard deviation(std) as of now. If you have a request to add more technical indicators, please contact us at our twitter account: https://twitter.com/TechFlareNode
+ 
 ### Contract Usage
 To use this adapter on-chain, find a node that supports this adapter and build your request like so:
 ```
 Chainlink.Request memory request = buildChainlinkRequest(jobId, this, this.fulfill.selector);
-run.add("n", "btc");
-run.add("p", "m");
+request.add("n", "btc");
+request.add("p", "m");
 string[] memory copyPath = new string[](2);
 copyPath[0] = "disparity";
 copyPath[1] = "5";
@@ -71,3 +77,4 @@ Response:
     "statusCode": 200
 }
 ```
+ 
